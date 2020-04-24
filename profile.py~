@@ -1,0 +1,15 @@
+#!/usr/bin/python
+
+"""
+
+This profile creates an Open vSwitch LAN with a single/central OVS
+"switch" node and a configurable number of attached nodes.  The OVS
+node also runs an instance of the RYU OpenFlow controller, which is
+setup to control the OVS instance.
+
+Instructions:
+
+None yet.
+
+"""
+
