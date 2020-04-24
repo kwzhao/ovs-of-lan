@@ -47,7 +47,7 @@ ovs.addService(rspec.Execute(shell="bash", command="sudo %s" % GLOBALS.ovsscmd))
 
 # Allocate the requested number of nodes and link them to the central
 # swich node.
-for i in range(params.NUMNODES):
+for i in range(1, params.NUMNODES + 1):
     node = request.RawPC("node%d" % i)
     node.disk_image = GLOBALS.nodeimg
     nifc = node.addInterface()

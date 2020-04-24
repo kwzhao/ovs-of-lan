@@ -1,10 +1,20 @@
 #!/bin/bash
 
-apt-get -q update
-apt-get -q install -y openvswitch-switch
-#apt-get -q install -y gcc python-pip python-dev libffi-dev libssl-dev libxml2-dev libxslt1-dev zlib1g-dev
-apt-get -q install -y python-pip
-pip install ryu
+# Initial stuff
+apt-get -qq update
 
-# Nothing yet!
+# Install OVS
+apt-get -q install -y openvswitch-switch
+
+# Install Floodlight controller prerequisites
+apt-get -q install -y build-essential default-jdk ant python-dev
+
+# Download, build, and install Floodlight
+git clone git://github.com/floodlight/floodlight.git /local
+cd /local/floodlight
+ant
+mkdir /var/lib/floodlight
+chmod 777 /var/lib/floodlight
+
+# Done!
 exit 0
