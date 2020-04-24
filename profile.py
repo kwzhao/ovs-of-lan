@@ -54,3 +54,5 @@ for i in range(params.NUMNODES):
     nifc.addAddress(rspec.IPv4Address("192.168.0.%d" % i, "255.255.255.0"))
     link = request.Link("%s-link" % node.name, members=[nifc, ovs])
 
+# Emit!
+portal.context.printRequestRSpec()
