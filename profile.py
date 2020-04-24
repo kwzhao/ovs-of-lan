@@ -49,7 +49,7 @@ ovs.addService(rspec.Execute(shell="bash", command=GLOBALS.ovsscmd))
 # swich node.
 for i in range(params.NUMNODES):
     node = request.RawPC("node%d" % i)
-    node.disk_image = nodeimg
+    node.disk_image = GLOBALS.nodeimg
     nifc = node.addInterface()
     nifc.addAddress(rspec.IPv4Address("192.168.0.%d" % i, "255.255.255.0"))
     link = request.Link("%s-link" % node.name, members=[nifc, ovs])
