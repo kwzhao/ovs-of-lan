@@ -43,7 +43,7 @@ params = portal.context.bindParameters()
 # Allocate OVS "switch" node
 ovs = request.RawPC("ovs")
 ovs.disk_mage = GLOBALS.ovsimg
-ovs.addService(rspec.Execute(shell="bash", command=GLOBALS.ovsscmd))
+ovs.addService(rspec.Execute(shell="bash", command="sudo %d" % GLOBALS.ovsscmd))
 
 # Allocate the requested number of nodes and link them to the central
 # swich node.
