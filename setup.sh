@@ -17,7 +17,7 @@ apt-get -q install -y openvswitch-switch
 #  chmod 777 /var/lib/floodlight || exit 1
 
 # Setup OVS
-#/local/repository/setup-ovs.sh || exit 1
+/local/repository/setup-ovs.sh || exit 1
 
 # Done!
 exit 0
