@@ -23,7 +23,7 @@ import geni.rspec.igext as ig
 class GLOBALS:
     nodeimg = "urn:publicid:IDN+emulab.net+image+emulab-ops//UBUNTU18-64-STD"
     ovsimg = "urn:publicid:IDN+emulab.net+image+emulab-ops//UBUNTU18-64-STD"
-    ovsscmd = "/local/repository/ovs-setup.sh"
+    ovsscmd = "/local/repository/setup.sh"
 
 # Top-level request object.
 request = portal.context.makeRequestRSpec()
