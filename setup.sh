@@ -10,7 +10,7 @@ apt-get -q install -y openvswitch-switch python3-pip screen
 pip3 install ryu
 
 # Run OVS and Ryu
-/local/repository/setup-ovs.sh || exit 1
+/local/repository/run-ovs.sh || exit 1
 
 # Done!
 exit 0
