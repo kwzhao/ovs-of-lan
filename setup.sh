@@ -3,20 +3,13 @@
 # Initial stuff
 apt-get -qq update
 
-# Install OVS
-apt-get -q install -y openvswitch-switch
+# Install OVS and Python pip
+apt-get -q install -y openvswitch-switch python3-pip screen
 
-# Install Floodlight controller prerequisites
-#apt-get -q install -y build-essential default-jdk ant python-dev
+# Install Ryu controller
+pip3 install ryu
 
-# Download and build Floodlight
-#git clone git://github.com/floodlight/floodlight.git /local/floodlight || exit 1
-#cd /local/floodlight || exit 1
-#ant || exit 1
-#mkdir /var/lib/floodlight && \
-#  chmod 777 /var/lib/floodlight || exit 1
-
-# Setup OVS
+# Run OVS and Ryu
 /local/repository/setup-ovs.sh || exit 1
 
 # Done!
