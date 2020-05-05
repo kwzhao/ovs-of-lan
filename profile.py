@@ -50,7 +50,7 @@ class GLOBALS:
 request = portal.context.makeRequestRSpec()
 
 # Parameter definitions
-request.defineParameter(
+portal.context.defineParameter(
     "NUMNODES",
     "Number of nodes in LAN",
     portal.ParameterType.INTEGER, 2,
@@ -58,7 +58,7 @@ request.defineParameter(
     "Number of nodes connected to central OVS switch node.  Cannot be more than 6 as this is the limit on the number of physical Ethernet ports available on any testbed node type."
 )
 
-request.defineParameter(
+portal.context.defineParameter(
     "NODETYPE",
     "Node type",
     portal.ParameterType.STRING, "",
