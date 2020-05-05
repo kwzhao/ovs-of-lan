@@ -1,14 +1,35 @@
 #!/usr/bin/python
 
 """
-This profile creates an Open vSwitch LAN with a single/central OVS
-"switch" node and a configurable number of attached nodes.  The OVS
-node also runs an instance of the RYU OpenFlow controller, which is
-setup to control the OVS instance.
+
+This profile creates an Open vSwitch based LAN with a single/central 
+OVS "switch" node and a configurable number of attached
+nodes.  The OVS node also runs an instance of the RYU OpenFlow
+controller, which is setup to control the OVS instance.
 
 Instructions:
 
-TODO.
+The edge nodes in this profile simply run a stock UBUNTU18-64-STD
+image, and have a single link to the `ovs` switch node.  Each node has
+an address on the `192.168.1.0/24` subnet (explicitly set inside the
+profile).
+
+The Ryu controller starts up and listens on the loopback (localhost)
+interface on the `ovs` node.  BE SURE you specify `--ofp-listen-host
+127.0.0.1` if you restart it!  Otherwise Ryu will listen on the
+"control network" and be open to the Internet and probable
+exploitation.  The Ryu switch runs a simple L2 switching app included
+in the Ryu package.
+
+Open vSwitch also runs on the `ovs` switch, where a single bridge with
+all node links is created by the startup scripts in this profile.  OVS
+is pointed at the locally-running Ryu instance.
+
+More information on Ryu and Open vSwitch can be found via the
+following links:
+
+https://ryu.readthedocs.io/en/latest/
+http://docs.openvswitch.org/en/latest/
 
 """
 
@@ -29,12 +50,20 @@ class GLOBALS:
 request = portal.context.makeRequestRSpec()
 
 # Parameter definitions
-portal.context.defineParameter(
+request.defineParameter(
     "NUMNODES",
     "Number of nodes in LAN",
     portal.ParameterType.INTEGER, 2,
     [1,2,3,4,5,6],
     "Number of nodes connected to central OVS switch node.  Cannot be more than 6 as this is the limit on the number of physical Ethernet ports available on any testbed node type."
+)
+
+request.defineParameter(
+    "NODETYPE",
+    "Node type",
+    portal.ParameterType.STRING, "",
+    ['','d430','d710','pc3000'],
+    "Type of node to use in this experiment.  Default is *unbound*, meaning any type with enough available nodes."
 )
 
 # Bind and verify parameters
