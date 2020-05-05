@@ -1,18 +1,18 @@
 #!/usr/bin/python
 
-"""
-
-This profile creates an Open vSwitch based LAN with a single/central 
+"""This profile creates an Open vSwitch based LAN with a single/central 
 OVS "switch" node and a configurable number of attached
 nodes.  The OVS node also runs an instance of the RYU OpenFlow
 controller, which is setup to control the OVS instance.
 
 Instructions:
 
-The edge nodes in this profile simply run a stock UBUNTU18-64-STD
-image, and have a single link to the `ovs` switch node.  Each node has
-an address on the `192.168.1.0/24` subnet (explicitly set inside the
-profile).
+( Make sure the startup script on the `ovs` node is in state
+`Finished` before begining to use the experiment. )
+
+The edge nodes in this profile run a stock UBUNTU18-64-STD image, and
+have a single link to the `ovs` switch node.  Each node has an address
+on the `192.168.1.0/24` subnet (explicitly set inside the profile).
 
 The Ryu controller starts up and listens on the loopback (localhost)
 interface on the `ovs` node.  BE SURE you specify `--ofp-listen-host
