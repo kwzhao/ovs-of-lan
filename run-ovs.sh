@@ -9,8 +9,9 @@ for lanstr in `cat /var/emulab/boot/ifmap`; do
     IFS=" " read ifname ipaddr mac <<< "$lanstr"
     ovs-vsctl add-port br0 $ifname
     ip addr flush dev $ifname
-    ip addr add "${ipaddr}"/24 dev $ifname
-    ip link set br0 up
+    ip addr add "${ipaddr}"/24 dev br0
 done
+
+ip link set br0 up
 
 exit 0
