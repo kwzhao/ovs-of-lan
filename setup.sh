@@ -4,12 +4,9 @@
 apt-get -qq update
 
 # Install OVS and Python pip
-apt-get -q install -y openvswitch-switch python3-pip screen
+apt-get -q install -y openvswitch-switch
 
-# Install Ryu controller
-pip3 install ryu
-
-# Run OVS and Ryu
+# Run OVS
 /local/repository/run-ovs.sh || exit 1
 
 # Done!
