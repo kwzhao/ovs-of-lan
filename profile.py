@@ -81,16 +81,7 @@ for i in range(1, params.NUMNODES + 1):
     node = request.RawPC("node%d" % i)
     node.disk_image = GLOBALS.nodeimg
     node.hardware_type = params.NODETYPE
-
-    nifc = node.addInterface()
-    nifc.addAddress(rspec.IPv4Address("192.168.0.%d" % i, "255.255.255.0"))
-
-    oifc = ovs.addInterface()
-    oifc.addAddress(
-        rspec.IPv4Address("192.168.0.%d" % (i + 100), "255.255.255.0")
-    )  # Ensure unique IPs for OVS interfaces
-
-    link = request.Link("%s-link" % node.name, members=[nifc, oifc])
+    link = request.Link("%s-link" % node.name, members=[node, ovs])
 
 # Emit the RSpec
 portal.context.printRequestRSpec()
