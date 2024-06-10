@@ -40,8 +40,8 @@ import geni.rspec.pg as rspec
 
 # Global Variables
 class GLOBALS:
-    nodeimg = "urn:publicid:IDN+emulab.net+image+emulab-ops//UBUNTU18-64-STD"
-    ovsimg = "urn:publicid:IDN+emulab.net+image+emulab-ops//UBUNTU18-64-STD"
+    nodeimg = "urn:publicid:IDN+emulab.net+image+emulab-ops//UBUNTU22-64-STD"
+    ovsimg = "urn:publicid:IDN+emulab.net+image+emulab-ops//UBUNTU22-64-STD"
     ovsscmd = "/local/repository/setup.sh"
 
 
