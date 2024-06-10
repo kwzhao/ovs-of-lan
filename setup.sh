@@ -7,7 +7,7 @@ apt-get -qq update
 apt-get -q install -y openvswitch-switch
 
 # Run OVS
-/local/repository/run-ovs.sh || exit 1
+# /local/repository/run-ovs.sh || exit 1
 
 # Done!
 exit 0
