@@ -75,7 +75,7 @@ params = portal.context.bindParameters()
 
 # Allocate OVS "switch" node
 ovs = request.RawPC("ovs")
-ovs.disk_mage = GLOBALS.ovsimg
+ovs.disk_image = GLOBALS.ovsimg
 ovs.hardware_type = params.NODETYPE
 ovs.addService(rspec.Execute(shell="bash", command="sudo %s" % GLOBALS.ovsscmd))
 
@@ -91,7 +91,7 @@ for i in range(1, params.NUMNODES + 1):
     node.hardware_type = params.NODETYPE
     nifc = node.addInterface()
     nifc.addAddress(rspec.IPv4Address("192.168.0.%d" % (i + 1), "255.255.255.0"))
-    link = request.Link("%s-link" % node.name, members=[nifc, ovs])
+    link = request.Link("%s-link" % node.name, members=[nifc, ovs_iface])
 
 # Emit!
 portal.context.printRequestRSpec()
