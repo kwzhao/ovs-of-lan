@@ -1,12 +1,12 @@
 #!/bin/bash
 
 # Configure zsh
-chsh -s $(which zsh) $(whoami)
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+sudo -k chsh -s $(which zsh) ${USER}
 
 # Install Rust
 curl https://sh.rustup.rs -sSf | sh -s -- -y
-. "$HOME/.cargo/env"
+source ${HOME}/.cargo/env
 
 # Install zsh plugins
 cargo install sheldon --locked
