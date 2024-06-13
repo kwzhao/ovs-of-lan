@@ -6,10 +6,9 @@ sudo -k chsh -s $(which zsh) ${USER}
 
 # Install Rust
 curl https://sh.rustup.rs -sSf | sh -s -- -y
-source ${HOME}/.cargo/env
 
 # Install zsh plugins
-cargo install sheldon --locked
+${HOME}/cargo/.bin/cargo install sheldon --locked
 mkdir -p ~/.sheldon
 
 # Create and configure plugins.toml

@@ -16,7 +16,7 @@ ip link set br0 up
 
 # Set a top-level HTB to make sure the switch is the bottleneck.
 sudo tc qdisc add dev br0 root handle 1: htb default 10
-sudo tc class add dev br0 parent 1: classid 1:1 htb rate 5mbit ceil 5mbit
+sudo tc class add dev br0 parent 1: classid 1:1 htb rate 500mbit ceil 500mbit
 sudo tc filter add dev br0 parent 1: protocol all prio 1 u32 match u32 0 0 flowid 1:1
 
 # DRR is a child of HTB. Three classes, top two tagged with DSCP.
