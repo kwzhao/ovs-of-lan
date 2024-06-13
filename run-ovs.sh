@@ -14,56 +14,16 @@ done
 
 ip link set br0 up
 
-# Set up queueing disciplines for the OVS bridge.
-# DRR queueing.
-tc qdisc add \
-    dev br0 \
-    root \
-    handle 1: \
-    drr
-# Three classes, 1:1, 1:2, 1:3 with equal quanta.
-tc class add \
-    dev br0 \
-    parent 1: \
-    classid 1:1 \
-    drr quantum 2000
-tc class add \
-    dev br0 \
-    parent 1: \
-    classid 1:2 \
-    drr quantum 2000
-tc class add \
-    dev br0 \
-    parent 1: \
-    classid 1:3 \
-    drr quantum 2000
-# Set up filters.
-# AF21 to class 1:1.
-tc filter add \
-    dev br0 \
-    parent 1: \
-    protocol ip \
-    prio 1 \
-    u32 \
-    match ip dsfield 0x48 0xfc \
-    flowid 1:1
-# AF11 to class 1:2.
-tc filter add \
-    dev br0 \
-    parent 1: \
-    protocol ip \
-    prio 1 \
-    u32 \
-    match ip dsfield 0x28 0xfc \
-    flowid 1:2
-# Everything else to class 1:3.
-tc filter add \
-    dev br0 \
-    parent 1: \
-    protocol all \
-    prio 100 \
-    u32 \
-    match u32 0 0 \
-    flowid 1:3
+# Set a top-level HTB to make sure the switch is the bottleneck.
+sudo tc qdisc add dev br0 root handle 1: htb default 10
+sudo tc class add dev br0 parent 1: classid 1:1 htb rate 5mbit ceil 5mbit
+sudo tc filter add dev br0 parent 1: protocol all prio 1 u32 match u32 0 0 flowid 1:1
 
-exit 0
+# DRR is a child of HTB. Three classes, top two tagged with DSCP.
+sudo tc qdisc add dev br0 parent 1:1 handle 10: drr
+sudo tc class add dev br0 parent 10: classid 10:1 drr quantum 2000
+sudo tc class add dev br0 parent 10: classid 10:2 drr quantum 2000
+sudo tc class add dev br0 parent 10: classid 10:3 drr quantum 2000
+sudo tc filter add dev br0 parent 10: protocol ip prio 1 u32 match ip dsfield 0x48 0xfc flowid 10:1
+sudo tc filter add dev br0 parent 10: protocol ip prio 1 u32 match ip dsfield 0x28 0xfc flowid 10:2
+sudo tc filter add dev br0 parent 10: protocol all prio 2 u32 match u32 0 0 flowid 10:3

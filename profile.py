@@ -28,7 +28,8 @@ import geni.rspec.pg as rspec
 class GLOBALS:
     nodeimg = "urn:publicid:IDN+emulab.net+image+emulab-ops//UBUNTU22-64-STD"
     ovsimg = "urn:publicid:IDN+emulab.net+image+emulab-ops//UBUNTU22-64-STD"
-    ovsscmd = "/local/repository/setup.sh"
+    ovsscmd = "/local/repository/setup-ovs.sh"
+    nodescmd = "/local/repository/setup-nodes.sh"
 
 
 # Top-level request object.
@@ -67,6 +68,7 @@ for i in range(1, params.NUMNODES + 1):
     node = request.RawPC("node%d" % i)
     node.disk_image = GLOBALS.nodeimg
     node.hardware_type = params.NODETYPE
+    node.addService(rspec.Execute(shell="bash", command="sudo %s" % GLOBALS.nodescmd))
     link = request.Link("%s-link" % node.name, members=[node, ovs])
 
 # Emit the RSpec
