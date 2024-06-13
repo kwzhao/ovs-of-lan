@@ -29,7 +29,7 @@ class GLOBALS:
     nodeimg = "urn:publicid:IDN+emulab.net+image+emulab-ops//UBUNTU22-64-STD"
     ovsimg = "urn:publicid:IDN+emulab.net+image+emulab-ops//UBUNTU22-64-STD"
     ovsscmd = "/local/repository/setup-ovs.sh"
-    nodescmd = "/local/repository/setup-nodes.sh"
+    nodescmd = "/local/repository/setup-node.sh"
 
 
 # Top-level request object.
