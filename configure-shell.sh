@@ -26,3 +26,6 @@ github = "zsh-users/zsh-syntax-highlighting"
 name = "zsh-vi-mode"
 github = "jeffreytse/zsh-vi-mode"
 EOF
+
+echo 'eval "$(sheldon init --shell zsh)"' >> ~/.zshrc
+echo 'ZVM_VI_INSERT_ESCAPE_BINDKEY=jk' >> ~/.zshrc
