@@ -8,10 +8,9 @@ sudo -k chsh -s $(which zsh) ${USER}
 curl https://sh.rustup.rs -sSf | sh -s -- -y
 
 # Install zsh plugins
-${HOME}/cargo/.bin/cargo install sheldon --locked
+curl --proto '=https' -fLsS https://rossmacarthur.github.io/install/crate.sh \
+    | bash -s -- --repo rossmacarthur/sheldon --to ~/.local/bin
 mkdir -p ~/.sheldon
-
-# Create and configure plugins.toml
 cat << EOF > ~/.sheldon/plugins.toml
 [[plugins]]
 name = "zsh-autosuggestions"
