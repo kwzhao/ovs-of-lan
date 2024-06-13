@@ -9,21 +9,21 @@ curl https://sh.rustup.rs -sSf | sh -s -- -y
 
 # Install zsh plugins
 curl --proto '=https' -fLsS https://rossmacarthur.github.io/install/crate.sh \
-    | bash -s -- --repo rossmacarthur/sheldon --to ~/.local/bin
-mkdir -p ~/.sheldon
-cat << EOF > ~/.sheldon/plugins.toml
-[[plugins]]
-name = "zsh-autosuggestions"
+    | bash -s -- --repo rossmacarthur/sheldon --to ~/.cargo/bin
+mkdir -p ~/.config/sheldon
+cat << EOF > ~/.config/sheldon/plugins.toml
+shell = "zsh"
+
+[plugins.zsh-autosuggestions]
 github = "zsh-users/zsh-autosuggestions"
 
-[[plugins]]
-name = "zsh-syntax-highlighting"
+[plugins.zsh-syntax-highlighting]
 github = "zsh-users/zsh-syntax-highlighting"
 
-[[plugins]]
-name = "zsh-vi-mode"
+[plugins.zsh-vi-mode]
 github = "jeffreytse/zsh-vi-mode"
 EOF
 
-echo 'eval "$(sheldon init --shell zsh)"' >> ~/.zshrc
+/users/kwzhao/.local/bin/sheldon
+echo 'eval "$(~/.cargo/bin/sheldon init --shell zsh)"' >> ~/.zshrc
 echo 'ZVM_VI_INSERT_ESCAPE_BINDKEY=jk' >> ~/.zshrc
