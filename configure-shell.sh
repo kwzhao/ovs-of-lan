@@ -24,6 +24,5 @@ github = "zsh-users/zsh-syntax-highlighting"
 github = "jeffreytse/zsh-vi-mode"
 EOF
 
-/users/kwzhao/.local/bin/sheldon
-echo 'eval "$(~/.cargo/bin/sheldon init --shell zsh)"' >> ~/.zshrc
+echo 'eval "$(~/.cargo/bin/sheldon source)"' >> ~/.zshrc
 echo 'ZVM_VI_INSERT_ESCAPE_BINDKEY=jk' >> ~/.zshrc
