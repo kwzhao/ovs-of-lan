@@ -24,6 +24,6 @@ sudo tc qdisc add dev br0 parent 1:1 handle 10: drr
 sudo tc class add dev br0 parent 10: classid 10:1 drr quantum 2000
 sudo tc class add dev br0 parent 10: classid 10:2 drr quantum 2000
 sudo tc class add dev br0 parent 10: classid 10:3 drr quantum 2000
-sudo tc filter add dev br0 parent 10: protocol ip prio 1 u32 match ip dsfield 0x48 0xfc flowid 10:1
-sudo tc filter add dev br0 parent 10: protocol ip prio 1 u32 match ip dsfield 0x28 0xfc flowid 10:2
+sudo tc filter add dev br0 parent 10: protocol ip prio 1 u32 match ip dsfield 0x28 0xfc flowid 10:1
+sudo tc filter add dev br0 parent 10: protocol ip prio 1 u32 match ip dsfield 0x48 0xfc flowid 10:2
 sudo tc filter add dev br0 parent 10: protocol all prio 2 u32 match u32 0 0 flowid 10:3
